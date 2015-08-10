@@ -1,0 +1,36 @@
+<h1 class="text-center"><%= movie.Title %>
+</h1>
+
+
+<div class="row">
+<div class="col-md-6 col-lg-6">
+<a href="/" class="btn btn-info btn-sm pull-right">new search</a>
+<a href=<%= prevPage %> class="back glyphicon glyphicon-arrow-left pull-right"> back</a>
+<img class= "pull-right" src="<%= movie.Poster %>">
+</div>
+<div class="col-md-6 col-lg-6">
+<p><strong>imdbRating:</strong> <% var star = "<span class='glyphicon glyphicon-star star'></span>" %>
+<% for (i = 0; i < movie.imdbRating; i++) { %>
+  <%- star %>
+<% } %>
+(<%= movie.imdbRating %>)</p>
+
+<p class="tomatoes"><strong>Rotten Tomatoes Rating:</strong> <%= movie.tomatoRating %></p>
+<p class="tomatoes"><strong>Rotten Tomatoes Meter:</strong> <%= movie.tomatoMeter %></p>
+<p><strong>Year:</strong> <%= movie.Year %></p>
+<p><strong>Rated:</strong> <%= movie.Rated %></p>
+<p><strong>Released:</strong> <%= movie.Released %></p>
+<p><strong>Runtime:</strong> <%= movie.Runtime %></p>
+<p><strong>Genre:</strong> <%= movie.Genre %></p>
+<p><strong>Director:</strong> <%= movie.Director %></p>
+<p><strong>Writer:</strong> <%= movie.Writer %></p>
+<p><strong>Actors:</strong> <%= movie.Actors %></p>
+<p><strong>Plot:</strong> <%= movie.Plot %></p>
+<p><strong>Language:</strong> <%= movie.Language %></p>
+<p><strong>Country:</strong> <%= movie.Country %></p>
+<p><strong>Awards:</strong> <%= movie.Awards %></p>
+<p><strong>Metascore:</strong> <%= movie.Metascore %></p>
+<p><strong>imdbVotes:</strong> <%= movie.imdbVotes %></p>
+<p><strong>Year:</strong> <%= movie.Year %></p>
+</div>
+</div>

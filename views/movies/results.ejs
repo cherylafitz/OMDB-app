@@ -1,0 +1,15 @@
+<h1>Search Results <a href="/" class="btn btn-info btn-sm"> back to search</a></h1>
+
+
+<% if (myResults) { %>
+<% myResults.forEach(function(result){ %>
+
+
+<%- link_to(result.Title, result.imdbID) %> <br>
+
+<% }) %>
+<% } else { %>
+<%= message %>
+
+<% } %>
+

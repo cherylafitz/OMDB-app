@@ -1,0 +1,21 @@
+.star {
+  color: rgb(10,15,180);
+}
+
+body {
+  /*background-color: #000000;*/
+}
+
+.tomatoes strong {
+  color: rgb(200,30,40);
+}
+
+img {
+  border: 5px solid #000;
+  clear: both;
+  margin-top: 1em;
+}
+
+.back {
+  padding: .5em 1em;
+}
