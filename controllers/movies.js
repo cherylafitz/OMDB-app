@@ -14,8 +14,11 @@ router.get("/results", function(req, res) {
     // searchResults.push(results);
     // res.redirect("movies/results", results)
     if (results) {
-    res.render("movies/results", { myResults : results,
-    prevPage: req.headers['referer'] } )
+    res.render("movies/results", {
+      myResults : results,
+      searchTerm: q,
+      prevPage: req.headers['referer']
+    })
     }
     else {
       res.render("movies/results", {message: "Sorry, no results available.",
@@ -25,7 +28,6 @@ router.get("/results", function(req, res) {
   }
 });
 
-
 router.get("/:id", function(req, res)  {
   var id = req.params.id;
   var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true';
@@ -33,8 +35,10 @@ router.get("/:id", function(req, res)  {
     var parsedData = JSON.parse(data);
     var results = parsedData;
     // res.send(parsedData)
-    res.render("movies/show", { movie : parsedData,
-    prevPage: req.headers['referer']})
+    res.render("movies/show", {
+      movie : parsedData,
+      imbdId: id,
+      prevPage: req.headers['referer']})
   })
 })
 

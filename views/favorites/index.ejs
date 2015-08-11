@@ -1,0 +1,6 @@
+<h1>Favorite Movies</h1>
+<% favoriteMovies.forEach(function(movie){ %>
+<div class="well">
+    <h4><a href="/movies/<%= movie.imdbId %>"><%= movie.title %></a>, <%= movie.year %> <span class="pull-right"><%=  %><a href="/favorites/<%= movie.id %>/comments"><button class="btn btn-info">comments</button></a></span></h4>
+</div>
+<% }) %>

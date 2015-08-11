@@ -4,11 +4,18 @@
 
 <div class="row">
 <div class="col-md-6 col-lg-6">
-<a href="/" class="btn btn-info btn-sm pull-right">new search</a>
+
 <a href=<%= prevPage %> class="back glyphicon glyphicon-arrow-left pull-right"> back</a>
 <img class= "pull-right" src="<%= movie.Poster %>">
 </div>
 <div class="col-md-6 col-lg-6">
+<form method="post" action="/favorites">
+  <input type="hidden" value="<%= imbdId %>" name="id">
+  <input type="hidden" value="<%= movie.Title %>" name="title">
+  <input type="hidden" value="<%= movie.Year %>" name="year">
+  <input type="hidden" value="<%= movie.Poster %>" name="poster">
+  <button class="btn btn-success btn-sm">Add to favorites</button>
+</form>
 <p><strong>imdbRating:</strong> <% var star = "<span class='glyphicon glyphicon-star star'></span>" %>
 <% for (i = 0; i < movie.imdbRating; i++) { %>
   <%- star %>

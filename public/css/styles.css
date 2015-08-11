@@ -4,6 +4,20 @@
 
 body {
   /*background-color: #000000;*/
+  /*background-image: url('../images/movie-theatre-1234634.jpg');*/
+  background: url('../images/movie-theatre-1234634.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color: #cecece;
+}
+.well {
+  color: #555;
+}
+h3 {
+  color: #777;
+  margin-top: 2em;
 }
 
 .tomatoes strong {
@@ -14,6 +28,9 @@ img {
   border: 5px solid #000;
   clear: both;
   margin-top: 1em;
+}
+.row {
+  background-color: rgba(40,40,40, .8)
 }
 
 .back {

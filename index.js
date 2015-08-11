@@ -5,12 +5,16 @@ var ejsLayouts = require('express-ejs-layouts');
 var request = require('request');
 require('express-helpers')(app);
 var moviesController = require("./controllers/movies");
+var favoritesController = require("./controllers/favorites");
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(ejsLayouts);
 app.use("/movies", moviesController);
+app.use("/favorites", favoritesController);
+
+
 
 app.get("/", function(req, res) {
   res.render('main/index');
