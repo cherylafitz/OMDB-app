@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require('request');
+var db = require('../models');
 
 
 router.get("/results", function(req, res) {
@@ -17,7 +18,8 @@ router.get("/results", function(req, res) {
     res.render("movies/results", {
       myResults : results,
       searchTerm: q,
-      prevPage: req.headers['referer']
+      prevPage: req.headers['referer'],
+      pageName: "results"
     })
     }
     else {
@@ -34,13 +36,18 @@ router.get("/:id", function(req, res)  {
   request(url, function(error, response, data) {
     var parsedData = JSON.parse(data);
     var results = parsedData;
+    db.favorite.find({where: {imdbId:id}}).then(function(favorite) {
+      res.render("movies/show", {
+        movie : parsedData,
+        imbdId: id,
+        prevPage: req.headers['referer'],
+        pageName: "showMovie",
+        favorite: favorite
+      });
+    });
     // res.send(parsedData)
-    res.render("movies/show", {
-      movie : parsedData,
-      imbdId: id,
-      prevPage: req.headers['referer']})
-  })
-})
+  });
+});
 
 
 

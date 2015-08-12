@@ -2,13 +2,14 @@
 <h2>Comments</h2>
 <div class="row">
 
-<a href=<%= prevPage %> class="back glyphicon glyphicon-arrow-left pull-left"> back</a>
+<a href="/favorites/index" class="back glyphicon glyphicon-arrow-left pull-left"> back</a>
 </div>
 
 <% allComments.forEach(function(comment){ %>
 <div class="well">
 
-  <%= comment.content %>
+  <p><%= comment.content %></p>
+  <p><em><%= comment.createdAt %></em></p>
 </div>
 <% }) %>
 

@@ -2,7 +2,7 @@
   color: rgb(10,15,180);
 }
 
-body {
+body.home {
   /*background-color: #000000;*/
   /*background-image: url('../images/movie-theatre-1234634.jpg');*/
   background: url('../images/movie-theatre-1234634.jpg') no-repeat center center fixed;
@@ -10,27 +10,71 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  color: #cecece;
+}
+.float-container {
+  overflow: auto;
+  height: 100%;
+  position: relative;
+}
+body.favorites img {
+  margin-right: 1em;
+  height: 100px;
+}
+h1,
+h2 {
+  text-align: center;
+  margin-bottom: 1em;
+}
+/*body.favorites img::after {
+  content:'';
+  display:block;
+  clear: both;
+}*/
+body {
+  /*color: #cecece;*/
+  /*background-color: #000;*/
+}
+.taglist {
+  margin: .3em 1em;
+  float: right;
 }
 .well {
-  color: #555;
+/*  color: #555;
+  background-color: rgba(40,40,40, .9);
+  border: 1px solid #000;*/
+  margin: .5em;
+}
+.btn-delete {
+  float: right;
+}
+button.comments {
+  /*margin: 1em;*/
+/*  position: absolute;
+  bottom: 0;
+  right: 0;*/
 }
 h3 {
   color: #777;
   margin-top: 2em;
 }
-
+a {
+  /*color: #D03229;*/
+  font-size: 1.2em;
+}
 .tomatoes strong {
   color: rgb(200,30,40);
 }
 
 img {
-  border: 5px solid #000;
+  border: 2px solid #000;
   clear: both;
-  margin-top: 1em;
+  /*margin-top: 1em;*/
 }
-.row {
-  background-color: rgba(40,40,40, .8)
+.results .container {
+  /*background-color: rgba(40,40,40, .9);*/
+  padding-bottom: 1em;
+  text-align: center;
+  /*margin-top: 10vh;*/
 }
 
 .back {

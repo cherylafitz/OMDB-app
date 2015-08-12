@@ -9,6 +9,9 @@
 <img class= "pull-right" src="<%= movie.Poster %>">
 </div>
 <div class="col-md-6 col-lg-6">
+<% if (favorite){ %>
+  <b>This movie is in your favorites.</b>
+<% } else { %>
 <form method="post" action="/favorites">
   <input type="hidden" value="<%= imbdId %>" name="id">
   <input type="hidden" value="<%= movie.Title %>" name="title">
@@ -16,6 +19,7 @@
   <input type="hidden" value="<%= movie.Poster %>" name="poster">
   <button class="btn btn-success btn-sm">Add to favorites</button>
 </form>
+<% } %>
 <p><strong>imdbRating:</strong> <% var star = "<span class='glyphicon glyphicon-star star'></span>" %>
 <% for (i = 0; i < movie.imdbRating; i++) { %>
   <%- star %>

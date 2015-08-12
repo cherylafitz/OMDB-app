@@ -14,30 +14,65 @@ router.post('/', function(req, res){
   })
 });
 
+
+  db.tag.find({where: {id:1},include:[db.favorite]}).then(function(tag){
+    db.favorite.findAll().then(function(favorite){
+      console.log(tag.favorites);
+    })
+  })
+
 router.get('/index', function(req, res) {
-  db.favorite.findAll().then(function(favorites){
-    favorites.forEach(function(favorite) {
-      favorite.getComments().then(function(comments){
-        res.send
-        res.render('favorites/index', {
-        favoriteMovies: favorites,
-        comments: comments
+  // res.send(tagId)
+  var tagId = req.query.tagId;
+  if (tagId) {
+      db.tag.find({
+        where: {id:tagId},
+        include: [db.favorite]
+      }).then(function(tag){
+        db.favorite.findAll({include:[db.comment,db.tag]}).then(function(favorite){
+          res.render('favorites/index', {
+          favoriteMovies: tag.favorites,
+          pageName: "favorites"
         });
+    });
+      });
+  } else {
+    db.favorite.findAll({
+      include:[db.comment,db.tag]}).then(function(favorites){
+          res.render('favorites/index', {
+          favoriteMovies: favorites,
+          // tagId: tagId,
+          pageName: "favorites"
       });
     });
-  });
+  }
 })
 
 router.get('/:id/comments', function(req, res) {
-  var movieId = req.params.id;
-  db.comment.findAll({where: {favoriteId: movieId}}).then(function(comments){
-    db.favorite.findById(movieId).then(function(movie){
+
+  // better way:
+  db.favorite.find({
+    where: {id:req.params.id},
+    include: [db.comment]
+  }).then(function(movie){
       res.render('favorites/comments', {
-        allComments: comments,
+        allComments: movie.comments,
         movie: movie,
-        prevPage: req.headers['referer']
+        prevPage: req.headers['referer'],
+        pageName: "comments"
       });
-    });
+
+  // var movieId = req.params.id;
+  // db.comment.findAll({where: {favoriteId: movieId}}).then(function(comments){
+  //   db.favorite.findById(movieId).then(function(movie){
+  //     res.render('favorites/comments', {
+  //       allComments: comments,
+  //       movie: movie,
+  //       prevPage: req.headers['referer'],
+  //       pageName: "comments"
+  //     });
+  //   });
+
   });
 });
 
@@ -52,5 +87,50 @@ router.post('/:id/comments', function(req,res){
   })
 })
 
+// POST /favorites/:id
+router.delete('/:id', function(req,res){
+  // res.send('delete it!')
+  db.favorite.destroy({where:{id:req.params.id}}).then(function() {
+    res.redirect('/favorites/index');
+  })
+})
+
+router.get('/:id/tags/new', function(req, res){
+  var favId = req.params.id;
+  res.render('tags/new', {
+    pageName: 'newTag',
+    favId: favId
+  });
+});
+
+router.post('/:id/tags', function(req,res){
+  // res.send(req.body.word)
+  var favId = req.params.id;
+  db.favorite.find({where: {id:favId}}).then(function(favorite){
+    db.tag.findOrCreate({where: {word: req.body.word}}).spread(function(tag, create){
+      favorite.addTag(tag).then(function(){
+        res.redirect('/favorites/index')
+      })
+    })
+})
+});
+
+router.get('/tags', function(req, res) {
+  db.tag.findAll({include: [db.favorite]}).then(function(tags){
+    res.render('tags/index', {
+      pageName: 'allTags',
+      tags: tags
+    });
+  })
+})
+
+// router.get('/tags/:id/show', function(req, res) {
+//   db.tag.findById(req.params.id, {include: [db.favorite]}).then(function(tag){
+//     res.render('tags/show', {
+//       pageName: 'tagsMovies',
+//       tag: tag
+//     });
+//   })
+// })
 
 module.exports = router;

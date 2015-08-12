@@ -1,0 +1,11 @@
+<h1>All Tags</h1>
+
+<% tags.forEach(function(tag){ %>
+  <div class="well">
+  <h4><a href="/favorites/tags/<%= tag.id %>/show"> </a></h4>
+  <form action="/favorites/index" method="" role="form">
+      <input type="hidden" name="tagId" value="<%= tag.id %>" class="form-control" id="" placeholder="Input field">
+      <button class="btn"><%= tag.word %></button>
+  </form>
+  </div>
+<% }) %>

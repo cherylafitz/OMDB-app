@@ -1,15 +1,19 @@
 <h1>Search Results for "<%= searchTerm %>"</h1>
 
+<div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+<div class="well ">
 
 <% if (myResults) { %>
 <% myResults.forEach(function(result){ %>
 
 
-<%- link_to(result.Title, result.imdbID) %> <br>
+
+<a href="<%= result.imdbID %>"> <%= result.Title %></a> <br>
 
 <% }) %>
 <% } else { %>
 <%= message %>
 
 <% } %>
-
+</div>
+</div>
