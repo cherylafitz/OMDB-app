@@ -28,9 +28,14 @@ router.get("/results", function(req, res) {
     }
   });
   }
+  req.session.lastPage = '/results';
 });
 
 router.get("/:id", function(req, res)  {
+  var prevPage = '#';
+  if (req.session.lastPage) {
+    prevPage = req.headers['referer'];
+  }
   var id = req.params.id;
   var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true';
   request(url, function(error, response, data) {
@@ -40,7 +45,7 @@ router.get("/:id", function(req, res)  {
       res.render("movies/show", {
         movie : parsedData,
         imbdId: id,
-        prevPage: req.headers['referer'],
+        prevPage: prevPage,
         pageName: "showMovie",
         favorite: favorite
       });

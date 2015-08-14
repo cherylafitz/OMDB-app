@@ -15,37 +15,39 @@ router.post('/', function(req, res){
 });
 
 
-  db.tag.find({where: {id:1},include:[db.favorite]}).then(function(tag){
-    db.favorite.findAll().then(function(favorite){
-      console.log(tag.favorites);
-    })
-  })
+  // db.tag.find({where: {id:1},include:[db.favorite]}).then(function(tag){
+  //   db.favorite.findAll().then(function(favorite){
+  //     console.log(tag.favorites);
+  //   })
+  // })
 
 router.get('/index', function(req, res) {
   // res.send(tagId)
+  // sess=req.session;
   var tagId = req.query.tagId;
   if (tagId) {
       db.tag.find({
         where: {id:tagId},
-        include: [db.favorite]
+        include: [{
+          model: db.favorite,
+            include: [db.comment,db.tag]
+        }]
       }).then(function(tag){
-        db.favorite.findAll({include:[db.comment,db.tag]}).then(function(favorite){
           res.render('favorites/index', {
           favoriteMovies: tag.favorites,
           pageName: "favorites"
         });
-    });
       });
   } else {
     db.favorite.findAll({
       include:[db.comment,db.tag]}).then(function(favorites){
           res.render('favorites/index', {
           favoriteMovies: favorites,
-          // tagId: tagId,
           pageName: "favorites"
       });
     });
   }
+  req.session.lastPage = '/favorites/index'
 })
 
 router.get('/:id/comments', function(req, res) {
@@ -123,6 +125,18 @@ router.get('/tags', function(req, res) {
     });
   })
 })
+
+router.get('/tags/:id'), function(req,res) {
+  db.favorite.findAll({
+      include:[db.comment]},
+      {include: [db.tag]
+      }).then(function(favorites){
+      res.render('favorites/index', {
+      favoriteMovies: favorites,
+      pageName: "favorites"
+    });
+  });
+}
 
 // router.get('/tags/:id/show', function(req, res) {
 //   db.tag.findById(req.params.id, {include: [db.favorite]}).then(function(tag){
