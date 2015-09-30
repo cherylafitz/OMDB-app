@@ -1,22 +1,17 @@
 <h1>Search Results for "<%= searchTerm %>"</h1>
-
-<a href="<%= prevPage %>" class="back glyphicon glyphicon-arrow-left pull-left"> back</a>
-
-
-<div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-<div class="well ">
-
-<% if (myResults) { %>
-<% myResults.forEach(function(result){ %>
-
-
-
-<a href="<%= result.imdbID %>"> <%= result.Title %></a> <br>
-
-<% }) %>
-<% } else { %>
-<%= message %>
-
-<% } %>
+<div class="row">
+  <a href="<%= prevPage %>" class="back glyphicon glyphicon-arrow-left pull-left"> back</a>
 </div>
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+    <div class="well ">
+      <% if (myResults) { %>
+        <% myResults.forEach(function(result){ %>
+          <a href="<%= result.imdbID %>"> <%= result.Title %></a> <br>
+        <% }) %>
+      <% } else { %>
+        <%= message %>
+      <% } %>
+    </div>
+  </div>
 </div>
